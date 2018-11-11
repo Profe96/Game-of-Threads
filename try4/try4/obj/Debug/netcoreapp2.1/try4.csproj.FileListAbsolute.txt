@@ -1,0 +1,14 @@
+C:\Users\juanf\source\repos\try4\try4\bin\Debug\netcoreapp2.1\try4.deps.json
+C:\Users\juanf\source\repos\try4\try4\bin\Debug\netcoreapp2.1\try4.runtimeconfig.json
+C:\Users\juanf\source\repos\try4\try4\bin\Debug\netcoreapp2.1\try4.runtimeconfig.dev.json
+C:\Users\juanf\source\repos\try4\try4\bin\Debug\netcoreapp2.1\try4.dll
+C:\Users\juanf\source\repos\try4\try4\obj\Debug\netcoreapp2.1\try4.csprojAssemblyReference.cache
+C:\Users\juanf\source\repos\try4\try4\obj\Debug\netcoreapp2.1\try4.csproj.CoreCompileInputs.cache
+C:\Users\juanf\source\repos\try4\try4\obj\Debug\netcoreapp2.1\try4.RazorAssemblyInfo.cache
+C:\Users\juanf\source\repos\try4\try4\obj\Debug\netcoreapp2.1\try4.RazorAssemblyInfo.cs
+C:\Users\juanf\source\repos\try4\try4\obj\Debug\netcoreapp2.1\try4.AssemblyInfoInputs.cache
+C:\Users\juanf\source\repos\try4\try4\obj\Debug\netcoreapp2.1\try4.AssemblyInfo.cs
+C:\Users\juanf\source\repos\try4\try4\obj\Debug\netcoreapp2.1\try4.RazorTargetAssemblyInfo.cache
+C:\Users\juanf\source\repos\try4\try4\bin\Debug\netcoreapp2.1\try4.pdb
+C:\Users\juanf\source\repos\try4\try4\obj\Debug\netcoreapp2.1\try4.dll
+C:\Users\juanf\source\repos\try4\try4\obj\Debug\netcoreapp2.1\try4.pdb
