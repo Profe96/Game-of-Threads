@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2018 a las 22:57:24
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 5.6.34
+-- Tiempo de generación: 12-11-2018 a las 16:42:37
+-- Versión del servidor: 10.1.34-MariaDB
+-- Versión de PHP: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,71 +25,85 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `group`
+-- Estructura de tabla para la tabla `groups`
 --
 
-CREATE TABLE `group` (
-  `ID_Group` int(11) NOT NULL,
-  `Valor` int(11) NOT NULL
+CREATE TABLE `groups` (
+  `id_group` int(11) NOT NULL,
+  `valor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `group_product`
+-- Estructura de tabla para la tabla `group_products`
 --
 
-CREATE TABLE `group_product` (
-  `ID_GP` int(11) NOT NULL,
-  `ID_Group` int(11) NOT NULL,
-  `ID_Product` int(11) NOT NULL
+CREATE TABLE `group_products` (
+  `id_group_product` int(11) NOT NULL,
+  `id_group` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `product`
+-- Estructura de tabla para la tabla `own_products`
 --
 
-CREATE TABLE `product` (
-  `ID_Product` int(11) NOT NULL,
-  `ID` varchar(600) NOT NULL,
-  `ID_Type` int(11) NOT NULL,
-  `Link` varchar(500) NOT NULL
+CREATE TABLE `own_products` (
+  `id_product` int(11) NOT NULL,
+  `description` longblob NOT NULL,
+  `id_type` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `type_product`
+-- Estructura de tabla para la tabla `products`
 --
 
-CREATE TABLE `type_product` (
-  `ID_Type` int(11) NOT NULL,
-  `Nombre` varchar(100) NOT NULL
+CREATE TABLE `products` (
+  `id_product` int(11) NOT NULL,
+  `id` varchar(600) NOT NULL,
+  `id_type` int(11) NOT NULL,
+  `link` varchar(500) NOT NULL,
+  `reference` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user`
+-- Estructura de tabla para la tabla `type_products`
 --
 
-CREATE TABLE `user` (
-  `ID` int(11) NOT NULL,
-  `ID_Group` int(11) NOT NULL
+CREATE TABLE `type_products` (
+  `id_type` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user_product`
+-- Estructura de tabla para la tabla `users`
 --
 
-CREATE TABLE `user_product` (
-  `ID_UP` int(11) NOT NULL,
-  `ID_User` int(11) NOT NULL,
-  `ID_Product` int(11) NOT NULL
+CREATE TABLE `users` (
+  `id_user` int(11) NOT NULL,
+  `id_group` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user_products`
+--
+
+CREATE TABLE `user_products` (
+  `id_user_product` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -97,68 +111,80 @@ CREATE TABLE `user_product` (
 --
 
 --
--- Indices de la tabla `group`
+-- Indices de la tabla `groups`
 --
-ALTER TABLE `group`
-  ADD PRIMARY KEY (`ID_Group`);
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id_group`);
 
 --
--- Indices de la tabla `group_product`
+-- Indices de la tabla `group_products`
 --
-ALTER TABLE `group_product`
-  ADD PRIMARY KEY (`ID_GP`);
+ALTER TABLE `group_products`
+  ADD PRIMARY KEY (`id_group_product`);
 
 --
--- Indices de la tabla `type_product`
+-- Indices de la tabla `own_products`
 --
-ALTER TABLE `type_product`
-  ADD PRIMARY KEY (`ID_Type`);
+ALTER TABLE `own_products`
+  ADD PRIMARY KEY (`id_product`);
 
 --
--- Indices de la tabla `user`
+-- Indices de la tabla `type_products`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `type_products`
+  ADD PRIMARY KEY (`id_type`);
 
 --
--- Indices de la tabla `user_product`
+-- Indices de la tabla `users`
 --
-ALTER TABLE `user_product`
-  ADD PRIMARY KEY (`ID_UP`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- Indices de la tabla `user_products`
+--
+ALTER TABLE `user_products`
+  ADD PRIMARY KEY (`id_user_product`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `group`
+-- AUTO_INCREMENT de la tabla `groups`
 --
-ALTER TABLE `group`
-  MODIFY `ID_Group` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `groups`
+  MODIFY `id_group` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `group_product`
+-- AUTO_INCREMENT de la tabla `group_products`
 --
-ALTER TABLE `group_product`
-  MODIFY `ID_GP` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `group_products`
+  MODIFY `id_group_product` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `type_product`
+-- AUTO_INCREMENT de la tabla `own_products`
 --
-ALTER TABLE `type_product`
-  MODIFY `ID_Type` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `own_products`
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `user`
+-- AUTO_INCREMENT de la tabla `type_products`
 --
-ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `type_products`
+  MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `user_product`
+-- AUTO_INCREMENT de la tabla `users`
 --
-ALTER TABLE `user_product`
-  MODIFY `ID_UP` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `user_products`
+--
+ALTER TABLE `user_products`
+  MODIFY `id_user_product` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
