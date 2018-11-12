@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2018 a las 16:42:37
+-- Tiempo de generación: 12-11-2018 a las 19:58:15
 -- Versión del servidor: 10.1.34-MariaDB
 -- Versión de PHP: 7.2.7
 
@@ -21,6 +21,17 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `got_main_database`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `coincidences`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `coincidences` (
+`id` varchar(600)
+,`reference` varchar(100)
+);
 
 -- --------------------------------------------------------
 
@@ -44,6 +55,16 @@ CREATE TABLE `group_products` (
   `id_group` int(11) NOT NULL,
   `id_product` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `own_filter`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `own_filter` (
+`description` longblob
+);
 
 -- --------------------------------------------------------
 
@@ -105,6 +126,24 @@ CREATE TABLE `user_products` (
   `id_user` int(11) NOT NULL,
   `id_product` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `coincidences`
+--
+DROP TABLE IF EXISTS `coincidences`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `coincidences`  AS  select `products`.`id` AS `id`,`products`.`reference` AS `reference` from ((`products` join `group_products` on((`products`.`id_product` = `group_products`.`id_product`))) join `user_products` on((`products`.`id_product` = `user_products`.`id_product`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `own_filter`
+--
+DROP TABLE IF EXISTS `own_filter`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `own_filter`  AS  select `own_products`.`description` AS `description` from `own_products` ;
 
 --
 -- Índices para tablas volcadas
