@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>d9e30667-fca7-47b7-89c5-67f8131d7579</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,6 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.36.1" />
+    <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.36.1.1404" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 

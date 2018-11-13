@@ -15,9 +15,15 @@ namespace ServerApi
 {
     public class Startup
     {
+        public static string GoogleClientId { get; private set; }
+        public static string GoogleClientSecret { get; private set; }
+        public static string GoogleRedirectUri { get; private set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            GoogleClientId = Configuration["Google:clientId"];
+            GoogleClientSecret = Configuration["Azure:clientSecret"];
+            GoogleRedirectUri = Configuration["Azure:clientId"];
         }
 
         public IConfiguration Configuration { get; }
