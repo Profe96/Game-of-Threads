@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     (function () {
       var e = document.createElement("script");
@@ -30,9 +26,10 @@ class App extends Component {
   }
 
   googleSignInCallback = (e) => {
+    console.log(e);
     if (e["status"]["signed_in"]) {
       window.gapi.client.load("plus", "v1", function () {
-        let token = e["access_token"];
+        let token = e["id_token"];
         if (token) {
           this.getUserGoogleProfile(token)
         }
@@ -46,15 +43,25 @@ class App extends Component {
     });
     e.execute(function (e) {
       if (e.id) {
-        console.log(accesstoken)
-        console.log(e.email);
+        console.log(e.email)
       }
-    }.bind(this));
+    });
+    this.setState({ token: accesstoken });
+    this.callApi().then(res => {
+      console.log(res);
+    });
   }
+
+  callApi = async () => {
+    const response = await fetch(`/google/auth?idToken=${this.state.token}`);
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body);
+    return body;
+  };
 
   render() {
     return (
-      <div onClick={() => this.googleLogin()}>Google</div>
+      <div className="g-signin2" onClick={() => this.googleLogin()} />
     )
   }
 }

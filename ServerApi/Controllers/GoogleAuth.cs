@@ -15,7 +15,7 @@ namespace ServerApi.Controllers
     public class GoogleAuth : Controller
     {
         [HttpGet]
-        public async Task<ActionResult<string>> GetAsync(string idToken)
+        public async Task<ActionResult<string>> GetAsync( string idToken)
         {
             User user = await getAuthorization(idToken);
             return "logged";
