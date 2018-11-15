@@ -1,0 +1,11 @@
+c:\users\juanf\source\repos\models_db\models_db\bin\Debug\models_db.exe.config
+c:\users\juanf\source\repos\models_db\models_db\bin\Debug\models_db.exe
+c:\users\juanf\source\repos\models_db\models_db\bin\Debug\models_db.pdb
+c:\users\juanf\source\repos\models_db\models_db\bin\Debug\MySql.Data.dll
+c:\users\juanf\source\repos\models_db\models_db\obj\Debug\models_db.csprojAssemblyReference.cache
+c:\users\juanf\source\repos\models_db\models_db\obj\Debug\models_db.csproj.CoreCompileInputs.cache
+c:\users\juanf\source\repos\models_db\models_db\obj\Debug\models_db.csproj.CopyComplete
+c:\users\juanf\source\repos\models_db\models_db\obj\Debug\models_db.exe
+c:\users\juanf\source\repos\models_db\models_db\obj\Debug\models_db.pdb
+c:\users\juanf\source\repos\models_db\models_db\bin\Debug\Newtonsoft.Json.dll
+c:\users\juanf\source\repos\models_db\models_db\bin\Debug\Newtonsoft.Json.xml
