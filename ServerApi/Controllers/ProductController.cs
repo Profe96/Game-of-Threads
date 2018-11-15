@@ -5,19 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using ServerApi.Services;
+using ServerApi.Models;
 
 namespace ServerApi.Controllers
 {
     [Route("product")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : Controller
     {
         [HttpGet]
-        public ActionResult<string> Get(string searchTerm)
+        public JsonResult Get(string searchTerm)
         {
             var ebayApi = new EbayApi();
-            ebayApi.getProductsByName(searchTerm);
-            return "awebo";
+            var products = ebayApi.getProductsByName(searchTerm);
+            return Json(products);
         }
     }
 }

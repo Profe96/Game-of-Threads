@@ -15,7 +15,6 @@ class Home extends Component {
     }
 
     signOut() {
-        console.log(window.gapi);
         window.gapi.auth.setToken(null);
         window.gapi.auth.signOut();
         this.props.history.push(`/`);
