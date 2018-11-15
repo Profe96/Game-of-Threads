@@ -1,69 +1,26 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 import './App.css';
 
+import Login from './Login';
+import Home from './Home';
+
 class App extends Component {
-  componentDidMount() {
-    (function () {
-      var e = document.createElement("script");
-      e.async = true;
-      e.defer = true;
-      e.src = "https://apis.google.com/js/client:platform.js?onload=gPOnLoad";
-      var t = document.getElementsByTagName("script")[0];
-      t.parentNode.insertBefore(e, t)
-    })();
-  }
-
-  googleLogin = () => {
-    window.gapi.auth.signIn({
-      callback: function (authResponse) {
-        this.googleSignInCallback(authResponse)
-      }.bind(this),
-      clientid: "292122738397-rabof0ms7ocsb53k6kt23gg0aoqillur.apps.googleusercontent.com",
-      cookiepolicy: "single_host_origin",
-      requestvisibleactions: "http://schema.org/AddAction",
-      scope: "profile email"
-    });
-  }
-
-  googleSignInCallback = (e) => {
-    console.log(e);
-    if (e["status"]["signed_in"]) {
-      window.gapi.client.load("plus", "v1", function () {
-        let token = e["id_token"];
-        if (token) {
-          this.getUserGoogleProfile(token)
-        }
-      }.bind(this));
-    }
-  }
-
-  getUserGoogleProfile = (accesstoken) => {
-    var e = window.gapi.client.plus.people.get({
-      userId: "me"
-    });
-    e.execute(function (e) {
-      if (e.id) {
-        console.log(e.email)
-      }
-    });
-    this.setState({ token: accesstoken });
-    this.callApi().then(res => {
-      console.log(res);
-    });
-  }
-
-  callApi = async () => {
-    const response = await fetch(`/google/auth?idToken=${this.state.token}`);
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body);
-    return body;
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
   };
 
   render() {
     return (
-      <div className="g-signin2" onClick={() => this.googleLogin()} />
-    )
+      <Switch>
+        <Route exact path="/" render={(props) => <Login {...props} cookies={this.props.cookies} />} />
+        <Route exact path="/home/:id" render={(props) => <Home {...props} cookies={this.props.cookies} />} />
+      </Switch>
+    );
   }
 }
 
-export default App;
+
+export default withCookies(App);
