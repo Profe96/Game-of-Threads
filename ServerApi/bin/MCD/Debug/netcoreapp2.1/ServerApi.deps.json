@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "8d19439ef22c432fe18f0eac697c8789fe30c00a"
+    "signature": "b773fa845409950c3e74f6be97314e825e205765"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,8 @@
     ".NETCoreApp,Version=v2.1": {
       "ServerApi/1.0.0": {
         "dependencies": {
+          "Google.Apis.Auth": "1.36.1",
+          "Google.Apis.Oauth2.v2": "1.36.1.1404",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.NETCore.App": "2.1.0"
         },
@@ -32,6 +34,70 @@
         },
         "compile": {
           "ServerApi.dll": {}
+        }
+      },
+      "Google.Apis/1.36.1": {
+        "dependencies": {
+          "Google.Apis.Core": "1.36.1",
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "assemblyVersion": "1.36.1.0",
+            "fileVersion": "1.36.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.dll": {}
+        }
+      },
+      "Google.Apis.Auth/1.36.1": {
+        "dependencies": {
+          "Google.Apis": "1.36.1",
+          "Google.Apis.Core": "1.36.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {
+            "assemblyVersion": "1.36.1.0",
+            "fileVersion": "1.36.1.0"
+          },
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "assemblyVersion": "1.36.1.0",
+            "fileVersion": "1.36.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {}
+        }
+      },
+      "Google.Apis.Core/1.36.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "assemblyVersion": "1.36.1.0",
+            "fileVersion": "1.36.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {}
+        }
+      },
+      "Google.Apis.Oauth2.v2/1.36.1.1404": {
+        "dependencies": {
+          "Google.Apis": "1.36.1",
+          "Google.Apis.Auth": "1.36.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Oauth2.v2.dll": {
+            "assemblyVersion": "1.36.1.1404",
+            "fileVersion": "1.36.1.1404"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Oauth2.v2.dll": {}
         }
       },
       "Microsoft.NETCore.App/2.1.0": {
@@ -3155,6 +3221,34 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Google.Apis/1.36.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NBfotn7kOSd1biulilvCu3CIWr5kI4gXBNGGZyvOgE+ilR06zTPY9kPSVblYUoYPsXFvouZOS8GYPhnpnAK/Zw==",
+      "path": "google.apis/1.36.1",
+      "hashPath": "google.apis.1.36.1.nupkg.sha512"
+    },
+    "Google.Apis.Auth/1.36.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ECo2d+X7gDaa3iBHUTMgW1XZZa9MnjZ3ehAY4oAwpmypcQmvRNchvsuKRxqXq4fwCyGO6gS6iEi6hi6pPxwc0A==",
+      "path": "google.apis.auth/1.36.1",
+      "hashPath": "google.apis.auth.1.36.1.nupkg.sha512"
+    },
+    "Google.Apis.Core/1.36.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UVcewN+O3kQ0bJ+pSH10RLc2vMNmgBGetXGY9HQms3W0PXWqiIh2PioVggwrfLmL/6wYBJA9N3l+vA/C2yS0kw==",
+      "path": "google.apis.core/1.36.1",
+      "hashPath": "google.apis.core.1.36.1.nupkg.sha512"
+    },
+    "Google.Apis.Oauth2.v2/1.36.1.1404": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OlKlWy3GqQnYLJk3TZRjQ7XK2x5lkYAoo/pC7buXVuXWkp3pwUhPtConouk36zF9Pw0zzCsUZn1UPM1p2OjESg==",
+      "path": "google.apis.oauth2.v2/1.36.1.1404",
+      "hashPath": "google.apis.oauth2.v2.1.36.1.1404.nupkg.sha512"
     },
     "Microsoft.NETCore.App/2.1.0": {
       "type": "package",
