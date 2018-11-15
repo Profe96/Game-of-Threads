@@ -11637,7 +11637,8 @@
       "Google.Apis.Auth >= 1.36.1",
       "Google.Apis.Oauth2.v2 >= 1.36.1.1404",
       "Microsoft.AspNetCore.App >= 2.1.1",
-      "Microsoft.NETCore.App >= 2.1.0"
+      "Microsoft.NETCore.App >= 2.1.0",
+      "Newtonsoft.Json >= 11.0.2"
     ]
   },
   "packageFolders": {
@@ -11647,11 +11648,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Localhost\\Rocket\\Game-of-Threads\\ServerApi\\ServerApi.csproj",
+      "projectUniqueName": "C:\\Localhost\\Rocket\\Game-of-Threads\\ServerApi\\ServerApi.csproj",
       "projectName": "ServerApi",
-      "projectPath": "c:\\Localhost\\Rocket\\Game-of-Threads\\ServerApi\\ServerApi.csproj",
+      "projectPath": "C:\\Localhost\\Rocket\\Game-of-Threads\\ServerApi\\ServerApi.csproj",
       "packagesPath": "C:\\Users\\David23\\.nuget\\packages\\",
-      "outputPath": "c:\\Localhost\\Rocket\\Game-of-Threads\\ServerApi\\obj\\",
+      "outputPath": "C:\\Localhost\\Rocket\\Game-of-Threads\\ServerApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -11699,6 +11700,10 @@
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[11.0.2, )"
           }
         },
         "imports": [
