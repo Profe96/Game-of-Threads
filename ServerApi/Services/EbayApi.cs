@@ -50,6 +50,8 @@ namespace ServerApi.Services
                 var sellingStatus = ((JArray)singleItem.GetValue("sellingStatus")).Children();
                 JObject currentPrice = (JObject)((JObject)sellingStatus.FirstOrDefault()).GetValue("convertedCurrentPrice").FirstOrDefault();
 
+                //var description = EbayCrawler.crawlerAsyncForDescriptionAsync(singleItem.GetValue("viewItemURL").FirstOrDefault().ToString());
+
                 listOfProducts.Add(new Product
                 {
                     id = singleItem.GetValue("itemId").FirstOrDefault().ToString(),

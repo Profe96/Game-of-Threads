@@ -1,32 +1,16 @@
 import React, { Component } from 'react';
+import { GoogleLogin } from 'react-google-login';
 import './App.css';
 
 class Login extends Component {
-    componentDidMount() {
-        (function () {
-            var e = document.createElement("script");
-            e.async = true;
-            e.defer = true;
-            e.src = "https://apis.google.com/js/client:platform.js?onload=gPOnLoad";
-            var t = document.getElementsByTagName("script")[0];
-            t.parentNode.insertBefore(e, t)
-        })();
+    constructor(props) {
+        super(props);
+
+        this.googleSignInCallback = this.googleSignInCallback.bind(this);
     }
 
-    googleLogin = () => {
-        window.gapi.auth.signIn({
-            callback: function (authResponse) {
-                this.googleSignInCallback(authResponse)
-            }.bind(this),
-            clientid: "292122738397-rabof0ms7ocsb53k6kt23gg0aoqillur.apps.googleusercontent.com",
-            cookiepolicy: "single_host_origin",
-            requestvisibleactions: "http://schema.org/AddAction",
-            scope: "profile email"
-        });
-    }
-
-    googleSignInCallback = (e) => {
-        let token = e["id_token"];
+    googleSignInCallback = (response) => {
+        let token = response.Zi.id_token;
         if (token) {
             this.setState({ token: token });
             this.callApi().then(res => {
@@ -44,7 +28,12 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="g-signin2 googleButtonSignIn" onClick={() => this.googleLogin()} />
+            <GoogleLogin className="g-signin2"
+                clientId="292122738397-rabof0ms7ocsb53k6kt23gg0aoqillur.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={this.googleSignInCallback}
+                onFailure={this.googleSignInCallback}
+            />
         )
     }
 }

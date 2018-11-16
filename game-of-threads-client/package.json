@@ -2,12 +2,13 @@
   "name": "game-of-threads-client",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://storagegameofthreads.z16.web.core.windows.net/",
+  "license": "ISC",
   "proxy": "https://gameofthreads.azurewebsites.net/",
   "dependencies": {
     "react": "^16.6.3",
     "react-cookie": "^3.0.4",
     "react-dom": "^16.6.3",
+    "react-google-login": "^3.2.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1"
   },
