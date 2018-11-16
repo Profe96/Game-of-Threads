@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2018 a las 19:58:15
--- Versión del servidor: 10.1.34-MariaDB
--- Versión de PHP: 7.2.7
+-- Tiempo de generación: 16-11-2018 a las 17:55:36
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 5.6.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,9 +29,18 @@ SET time_zone = "+00:00";
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `coincidences` (
-`id` varchar(600)
-,`reference` varchar(100)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ebay`
+--
+
+CREATE TABLE `ebay` (
+  `id` varchar(500) NOT NULL,
+  `description` varchar(10000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -41,7 +50,8 @@ CREATE TABLE `coincidences` (
 
 CREATE TABLE `groups` (
   `id_group` int(11) NOT NULL,
-  `valor` int(11) NOT NULL
+  `valor` int(11) NOT NULL,
+  `description` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -63,7 +73,7 @@ CREATE TABLE `group_products` (
 -- (Véase abajo para la vista actual)
 --
 CREATE TABLE `own_filter` (
-`description` longblob
+`description` varchar(10000)
 );
 
 -- --------------------------------------------------------
@@ -74,9 +84,9 @@ CREATE TABLE `own_filter` (
 
 CREATE TABLE `own_products` (
   `id_product` int(11) NOT NULL,
-  `description` longblob NOT NULL,
+  `description` varchar(10000) NOT NULL,
   `id_type` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -86,8 +96,7 @@ CREATE TABLE `own_products` (
 --
 
 CREATE TABLE `products` (
-  `id_product` int(11) NOT NULL,
-  `id` varchar(600) NOT NULL,
+  `id` varchar(500) NOT NULL,
   `id_type` int(11) NOT NULL,
   `link` varchar(500) NOT NULL,
   `reference` varchar(100) NOT NULL
@@ -111,7 +120,7 @@ CREATE TABLE `type_products` (
 --
 
 CREATE TABLE `users` (
-  `id_user` int(11) NOT NULL,
+  `Email` varchar(100) NOT NULL,
   `id_group` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -123,8 +132,8 @@ CREATE TABLE `users` (
 
 CREATE TABLE `user_products` (
   `id_user_product` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL
+  `id_user` varchar(100) NOT NULL,
+  `id_product` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -150,6 +159,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indices de la tabla `ebay`
+--
+ALTER TABLE `ebay`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `groups`
 --
 ALTER TABLE `groups`
@@ -168,16 +183,16 @@ ALTER TABLE `own_products`
   ADD PRIMARY KEY (`id_product`);
 
 --
+-- Indices de la tabla `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `type_products`
 --
 ALTER TABLE `type_products`
   ADD PRIMARY KEY (`id_type`);
-
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`);
 
 --
 -- Indices de la tabla `user_products`
@@ -212,12 +227,6 @@ ALTER TABLE `own_products`
 --
 ALTER TABLE `type_products`
   MODIFY `id_type` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `user_products`
