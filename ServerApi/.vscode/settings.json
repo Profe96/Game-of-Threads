@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/7aa00139-6f34-47d7-b2a6-50d78597efe6/resourceGroups/appsvc_rg_windows_centralus/providers/Microsoft.Web/sites/GameOfThreads",
+    "appService.deploySubpath": "bin\\MCD\\Release\\netcoreapp2.1\\publish"
+}
