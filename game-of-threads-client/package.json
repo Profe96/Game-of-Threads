@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "ISC",
-  "proxy": "https://gameofthreads.azurewebsites.net/",
+  "proxy": "http://localhost:8000/",
   "dependencies": {
     "react": "^16.6.3",
     "react-cookie": "^3.0.4",
