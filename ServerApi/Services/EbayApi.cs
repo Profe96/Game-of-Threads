@@ -25,7 +25,7 @@ namespace ServerApi.Services
         {
             var ebayApiCall = new EbayCall
             {
-                apiUrl = "http://svcs.ebay.com/services/search/FindingService/v1?",
+                apiUrl = "https://svcs.ebay.com/services/search/FindingService/v1?",
                 apiCall = "findItemsByKeywords",
                 clientId = clientId,
                 responseFormat = "JSON",
