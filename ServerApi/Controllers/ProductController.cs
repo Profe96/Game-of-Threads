@@ -20,12 +20,5 @@ namespace ServerApi.Controllers
             var products = new EbayApi().getProductsByName(searchTerm, 10);
             return Json(products);
         }
-
-        [HttpPost]
-        public void Post([FromBody] Product product)
-        {
-            Console.WriteLine(product);
-            //Connection.insert_products();
-        }
     }
 }

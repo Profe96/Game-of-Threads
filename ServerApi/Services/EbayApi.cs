@@ -63,11 +63,9 @@ namespace ServerApi.Services
 
         public IList<Product> getProductsForRecommendation(Dictionary<string, string> filters)
         {
-            Console.WriteLine(filters.Count);
             string extra = "";
             foreach (KeyValuePair<string, string> entry in filters)
             {
-                Console.WriteLine(entry.Key);
                 extra += " " + entry.Value;
             }
 

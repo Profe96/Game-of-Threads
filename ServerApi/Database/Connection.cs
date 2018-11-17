@@ -232,9 +232,6 @@ namespace ServerApi.Database
                         }
                     }
                 }
-
-                Console.WriteLine("ok");
-                Console.Read();
             }
             catch (Exception e)
             {
@@ -275,8 +272,8 @@ namespace ServerApi.Database
 
             foreach (string item in ebay_products)
             {
-                Array broke = item.Split(',');
-                foreach (string sub_item in own_products)
+                string[] broke = item.Split(',');
+                foreach (string sub_item in broke)
                 {
                     if (!products.ContainsKey(sub_item))
                     {
@@ -294,7 +291,10 @@ namespace ServerApi.Database
                 }
             }
 
-            foreach (KeyValuePair<string, string> found in recommendation)
+            var newDictionary = recommendation.ToDictionary(entry => entry.Key,
+                                                           entry => entry.Value);
+
+            foreach (KeyValuePair<string, string> found in newDictionary)
             {
                 int max_val = 0;
                 string product_value = "";
@@ -306,8 +306,7 @@ namespace ServerApi.Database
                         {
                             max_val = entry.Value;
                             string[] sub_broke = entry.Key.Split(':');
-                            product_value = sub_broke[0];
-
+                            product_value = sub_broke[1];
                         }
                     }
                 }
