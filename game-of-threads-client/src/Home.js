@@ -94,15 +94,15 @@ class Product extends Component {
 
     handleClick() {
         fetch(`/selected?email=${this.props.email}&id=${this.props.product.id}&link=${this.props.product.link}&description=${this.props.product.description}`);
-        window.location = this.props.product.link;
+        window.open(this.props.product.link, '_blank');
     }
 
     render() {
         let product = this.props.product;
         let description = product.description.split(",");
         description = <ul>
-            <li>Color: {description[0]}</li>
-            <li>Power: {description[1]}</li>
+            <li>{description[0]}</li>
+            <li>{description[1]}</li>
         </ul>
 
         return (

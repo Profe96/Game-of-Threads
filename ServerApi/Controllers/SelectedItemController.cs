@@ -18,8 +18,8 @@ namespace ServerApi.Controllers
         [HttpGet]
         public void Get(string email, string id, string link, string description)
         {
-            int id_group = Connection.select_id_group(email);
-            Connection.insert_products(id, 1, link, "Ebay", email, id_group, description);
+            int id_group = new Connection().select_id_group(email);
+            new Connection().insert_products(id, 1, link, "Ebay", email, id_group, description);
         }
     }
 }

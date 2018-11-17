@@ -17,7 +17,7 @@ namespace ServerApi.Controllers
         [HttpGet]
         public JsonResult Get(string searchTerm)
         {
-            var products = new EbayApi().getProductsByName(searchTerm);
+            var products = new EbayApi().getProductsByName(searchTerm, 10);
             return Json(products);
         }
 

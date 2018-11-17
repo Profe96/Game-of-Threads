@@ -16,7 +16,7 @@ namespace ServerApi.Services
             clientId = "DavidAlv-GameOfTh-PRD-fc22b827a-dfe4f2bb";
         }
 
-        public IList<Product> getProductsByName(string name)
+        public IList<Product> getProductsByName(string name, int entries)
         {
             var ebayApiCall = new EbayCall
             {
@@ -26,7 +26,7 @@ namespace ServerApi.Services
                 responseFormat = "JSON",
                 keywords = name,
                 descriptionSearch = true,
-                paginationInputEntries = 10
+                paginationInputEntries = entries
             };
             string apiCallUrl = ebayApiCall.getApiCall();
             string response = ApiCall.getRequest(apiCallUrl);
@@ -59,6 +59,30 @@ namespace ServerApi.Services
                 });
             }
             return listOfProducts;
+        }
+
+        public IList<Product> getProductsForRecommendation(Dictionary<string, string> filters)
+        {
+            Console.WriteLine(filters.Count);
+            string extra = "";
+            foreach (KeyValuePair<string, string> entry in filters)
+            {
+                Console.WriteLine(entry.Key);
+                extra += " " + entry.Value;
+            }
+
+            IList<Product> recommendations = new List<Product>();
+            var productList = new List<string> { "microwave", "toaster", "blender" };
+            productList.ForEach(product =>
+            {
+                IList<Product> a = getProductsByName(product + extra, 3);
+                foreach (var item in a)
+                {
+                    recommendations.Add(item);
+                }
+            });
+
+            return recommendations;
         }
     }
 }

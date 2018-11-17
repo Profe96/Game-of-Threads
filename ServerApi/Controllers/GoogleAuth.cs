@@ -19,7 +19,7 @@ namespace ServerApi.Controllers
         public async Task<User> GetAsync(string idToken)
         {
             User user = await getAuthorization(idToken);
-            Connection.register_user(user.email);
+            new Connection().register_user(user.email);
             return user;
         }
 
