@@ -5,6 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Xml;
+using System.Windows.Forms;
+using System.Net;
+using HtmlAgilityPack;
+using Fizzler.Systems.HtmlAgilityPack;
+using System.Net.Http;
+using System.Web;
 
 namespace models_db
 {
@@ -15,29 +23,33 @@ namespace models_db
         //description = clave:valor, clave2:valor2
         static void Main(string[] args)
         {
-            connection();
-           
-
-            insert_products("bb", 1, "http://va.com", "Amazon", "Disneyland", 1, "asd"); 
+            Console.Read();
         }
-
         static void connection()
         {
-            connStr = "server =localhost;user=root; database =got_main_database";
+            connStr = "server =localhost;user=juanito; pass=juancito123!;database =got_main_database";
             conn = new MySqlConnection(connStr);
             conn.Open();
         }
 
         static Boolean register_user(string Email)
         {
-            connection();
-            string sql = "INSERT INTO users (Email, id_group) VALUES ('" + Email + "','')";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            Console.WriteLine("ok");
-            Console.Read();
-            return true;
+            try
+            {
+
+                connection();
+                string sql = "INSERT INTO users (Email, id_group) VALUES ('" + Email + "','')";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                Console.WriteLine("ok");
+                Console.Read();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         static Boolean insert_user_ingroup(string user, int id_group)
@@ -184,9 +196,8 @@ namespace models_db
         {
             List<string> own_products;
             List<string> ebay_products;
-           own_products = select_recommendations_own("a@a.com");
-            ebay_products = select_recommendations_ebay("a@a.com");
-            string a = "";
+           own_products = select_recommendations_own(user);
+            ebay_products = select_recommendations_ebay(user);
 
             Dictionary<string, int> products = new Dictionary<string, int>();
             Dictionary<string, string> recommendation = new Dictionary<string, string>();
@@ -286,11 +297,24 @@ namespace models_db
             return ebay_products;
         }
 
-        static List<object> search_recommendations(string user)
+        static List<object> search_recommendations(Dictionary<string, string> products)
         {
+            string query = "";
+            Dictionary<string, string> searchquery = products;
+            foreach (KeyValuePair<string, string> result in searchquery)
+            {
+                if (!query.Equals(""))
+                {
+                    query = "%" + result.Key + ":" + result.Value + "%";
+                }
+                else
+                {
+                    query += " OR description LIKE %" + result.Key + ":" + result.Value + "%";
+                }
+            }
             List<object> searching = new List<object>();
             connection();
-            string sql4 = "SELECT description FROM own_products WHERE description LIKE ";
+            string sql4 = "SELECT description FROM own_products WHERE description LIKE " + query;
             MySqlCommand cmd4 = new MySqlCommand(sql4, conn);
             MySqlDataReader rdr = cmd4.ExecuteReader();
 
@@ -300,6 +324,7 @@ namespace models_db
                 value_product.id = "";
                 searching.Add(rdr[0].ToString());
             }
+        
             return searching;
         }
 
@@ -309,6 +334,7 @@ namespace models_db
             public string product_type;
             public List<string> description;
         }
+
 
         }
 }
