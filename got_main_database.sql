@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2018 a las 17:55:36
+-- Tiempo de generación: 17-11-2018 a las 01:26:58
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 5.6.34
 
@@ -21,15 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `got_main_database`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `coincidences`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `coincidences` (
-);
 
 -- --------------------------------------------------------
 
@@ -65,16 +56,6 @@ CREATE TABLE `group_products` (
   `id_group` int(11) NOT NULL,
   `id_product` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `own_filter`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `own_filter` (
-`description` varchar(10000)
-);
 
 -- --------------------------------------------------------
 
@@ -135,24 +116,6 @@ CREATE TABLE `user_products` (
   `id_user` varchar(100) NOT NULL,
   `id_product` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `coincidences`
---
-DROP TABLE IF EXISTS `coincidences`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `coincidences`  AS  select `products`.`id` AS `id`,`products`.`reference` AS `reference` from ((`products` join `group_products` on((`products`.`id_product` = `group_products`.`id_product`))) join `user_products` on((`products`.`id_product` = `user_products`.`id_product`))) ;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `own_filter`
---
-DROP TABLE IF EXISTS `own_filter`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `own_filter`  AS  select `own_products`.`description` AS `description` from `own_products` ;
 
 --
 -- Índices para tablas volcadas
