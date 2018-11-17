@@ -13,7 +13,7 @@ namespace ServerApi.Services
         public string clientId { get; set; }
         public EbayApi()
         {
-            clientId = Startup.EbayClientId;
+            clientId = "DavidAlv-GameOfTh-PRD-fc22b827a-dfe4f2bb";
         }
 
         public IList<Product> getProductsByName(string name)

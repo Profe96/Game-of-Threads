@@ -46,6 +46,7 @@ namespace ServerApi.Services
                 }
                 catch (System.ArgumentOutOfRangeException e)
                 {
+                    Console.WriteLine(e);
                     caracteristicas2.Add("None");
                 }
             }
