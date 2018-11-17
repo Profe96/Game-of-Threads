@@ -10,20 +10,25 @@ namespace ServerApi.Database
 {
     class Connection
     {
-        static string connStr;
-        static MySqlConnection conn;
         static MySqlConnectionStringBuilder builder;
 
         public Connection()
         {
             builder = new MySqlConnectionStringBuilder
             {
+                Server = "localhost",
+                Database = "got_main_database",
+                UserID = "root",
+            };
+            /*
+                        builder = new MySqlConnectionStringBuilder
+            {
                 Server = "mydatabase-mysqldbserver.mysql.database.azure.com",
                 Database = "got_main_database",
                 UserID = "mysqldbuser@mydatabase-mysqldbserver",
                 Password = "pasS123456",
                 SslMode = MySqlSslMode.Required,
-            };
+            }; */
         }
 
         public void register_user(string Email)
@@ -58,6 +63,7 @@ namespace ServerApi.Database
                     }
                     catch (Exception e)
                     {
+                        Console.WriteLine(e);
                         return 0;
                     }
                 }
@@ -74,7 +80,6 @@ namespace ServerApi.Database
                     string sql = "UPDATE users SET id_group = " + id_group + " WHERE Email = '" + user + "'";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.ExecuteNonQuery();
-                    conn.Close();
                 }
             }
 
@@ -205,7 +210,7 @@ namespace ServerApi.Database
                 }
                 catch (Exception e)
                 {
-                    conn.Close();
+                    Console.WriteLine(e);
                 }
 
                 using (var conn = new MySqlConnection(builder.ConnectionString))
@@ -235,7 +240,7 @@ namespace ServerApi.Database
             }
             catch (Exception e)
             {
-                conn.Close();
+                Console.WriteLine(e);
             }
         }
 
@@ -397,8 +402,6 @@ namespace ServerApi.Database
         class return_product
         {
             public string id;
-            public string product_type;
-            public List<string> description;
         }
     }
 }

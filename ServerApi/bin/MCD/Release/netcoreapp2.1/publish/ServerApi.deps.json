@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "f2466e030bc113fe0cf2961ca9f98d74d4678238"
+    "signature": "96fcc2d43424b2d6a92014a82f853c9cc11ffdd9"
   },
   "compilationOptions": {
     "defines": [
@@ -28,6 +28,7 @@
           "Google.Apis.Oauth2.v2": "1.36.1.1404",
           "HtmlAgilityPack": "1.8.10",
           "Microsoft.AspNetCore.App": "2.1.1",
+          "Microsoft.Azure.CognitiveServices.Vision.ComputerVision": "3.2.0",
           "Microsoft.NETCore.App": "2.1.0",
           "mysql": "5.5.14.1",
           "MySql.Data": "8.0.13",
@@ -134,6 +135,24 @@
         },
         "compile": {
           "lib/netstandard2.0/HtmlAgilityPack.dll": {}
+        }
+      },
+      "Microsoft.Azure.CognitiveServices.Vision.ComputerVision/3.2.0": {
+        "dependencies": {
+          "Microsoft.Rest.ClientRuntime": "2.3.12",
+          "Microsoft.Rest.ClientRuntime.Azure": "3.3.13",
+          "NETStandard.Library": "2.0.3",
+          "Newtonsoft.Json": "11.0.2",
+          "System.Net.Http": "4.3.2"
+        },
+        "runtime": {
+          "lib/netstandard1.4/Microsoft.Azure.CognitiveServices.Vision.ComputerVision.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.2.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.4/Microsoft.Azure.CognitiveServices.Vision.ComputerVision.dll": {}
         }
       },
       "Microsoft.NETCore.App/2.1.0": {
@@ -302,6 +321,37 @@
       },
       "Microsoft.NETCore.Platforms/2.1.0": {},
       "Microsoft.NETCore.Targets/2.1.0": {},
+      "Microsoft.Rest.ClientRuntime/2.3.12": {
+        "dependencies": {
+          "NETStandard.Library": "2.0.3",
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard1.4/Microsoft.Rest.ClientRuntime.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.3.12.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.4/Microsoft.Rest.ClientRuntime.dll": {}
+        }
+      },
+      "Microsoft.Rest.ClientRuntime.Azure/3.3.13": {
+        "dependencies": {
+          "Microsoft.Rest.ClientRuntime": "2.3.12",
+          "NETStandard.Library": "2.0.3",
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard1.4/Microsoft.Rest.ClientRuntime.Azure.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.3.13.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.4/Microsoft.Rest.ClientRuntime.Azure.dll": {}
+        }
+      },
       "mysql/5.5.14.1": {
         "dependencies": {
           "chocolatey": "0.9.8.3"
@@ -3393,6 +3443,13 @@
       "path": "htmlagilitypack/1.8.10",
       "hashPath": "htmlagilitypack.1.8.10.nupkg.sha512"
     },
+    "Microsoft.Azure.CognitiveServices.Vision.ComputerVision/3.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jTu7seRRhaIbIt0yltyKxJCazqih6zmeqkCBdwBFB9rU549Kgt1nQrTZKAa/L4cEfj9je3YocE8GeiMc6AsY3Q==",
+      "path": "microsoft.azure.cognitiveservices.vision.computervision/3.2.0",
+      "hashPath": "microsoft.azure.cognitiveservices.vision.computervision.3.2.0.nupkg.sha512"
+    },
     "Microsoft.NETCore.App/2.1.0": {
       "type": "package",
       "serviceable": true,
@@ -3434,6 +3491,20 @@
       "sha512": "sha512-etaYwrLZQUS+b3UWTpCnUggd6SQ/ZIkZ5pHnoR7+dIWt/wp2Rv3CvMKOZISsrt7FYCHKwCxfcepuuyEWkQxADg==",
       "path": "microsoft.netcore.targets/2.1.0",
       "hashPath": "microsoft.netcore.targets.2.1.0.nupkg.sha512"
+    },
+    "Microsoft.Rest.ClientRuntime/2.3.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-h7a49XwmCE36Qq6zXcw0tFhibenr5VxwuN/Swnjc/dlVdkSD56YO1ybTtsCd6HAMdmrz7+C5XQ3xbUSw1ORAlQ==",
+      "path": "microsoft.rest.clientruntime/2.3.12",
+      "hashPath": "microsoft.rest.clientruntime.2.3.12.nupkg.sha512"
+    },
+    "Microsoft.Rest.ClientRuntime.Azure/3.3.13": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kA+BTz8w3S8oqjsI3PK+Nbhw8TNJcc6OzS45B58GRVngKbUrOseiYfccvJnFYcVYntpOReh9qRSGKYuszJci1g==",
+      "path": "microsoft.rest.clientruntime.azure/3.3.13",
+      "hashPath": "microsoft.rest.clientruntime.azure.3.3.13.nupkg.sha512"
     },
     "mysql/5.5.14.1": {
       "type": "package",

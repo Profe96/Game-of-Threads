@@ -30,10 +30,10 @@ namespace ServerApi.Services
             };
             string apiCallUrl = ebayApiCall.getApiCall();
             string response = ApiCall.getRequest(apiCallUrl);
-            return parseApiResponseForProducts(response);
+            return parseApiResponseForProducts(response, name);
         }
 
-        public IList<Product> parseApiResponseForProducts(string response)
+        public IList<Product> parseApiResponseForProducts(string response, string name)
         {
             IList<Product> listOfProducts = new List<Product>();
             JObject json = JObject.Parse(response);
@@ -45,18 +45,23 @@ namespace ServerApi.Services
                 var sellingStatus = ((JArray)singleItem.GetValue("sellingStatus")).Children();
                 JObject currentPrice = (JObject)((JObject)sellingStatus.FirstOrDefault()).GetValue("convertedCurrentPrice").FirstOrDefault();
 
-                var description = EbayCrawler.crawlerForDescription(singleItem.GetValue("viewItemURL").FirstOrDefault().ToString());
+                var itemUrl = singleItem.GetValue("viewItemURL").FirstOrDefault().ToString();
+                var imageUrl = singleItem.GetValue("galleryURL").FirstOrDefault().ToString();
 
-                listOfProducts.Add(new Product
+                var description = EbayCrawler.crawlerForDescription(itemUrl);
+                if (ImageVerification.VerifyImage(imageUrl, name.Split(" ")[0]))
                 {
-                    id = singleItem.GetValue("itemId").FirstOrDefault().ToString(),
-                    name = singleItem.GetValue("title").FirstOrDefault().ToString(),
-                    imageUrl = singleItem.GetValue("galleryURL").FirstOrDefault().ToString(),
-                    description = String.Join(", ", description.ToArray()),
-                    price = currentPrice.GetValue("__value__").ToString() + " " +
-                    currentPrice.GetValue("@currencyId").ToString(),
-                    link = singleItem.GetValue("viewItemURL").FirstOrDefault().ToString()
-                });
+                    listOfProducts.Add(new Product
+                    {
+                        id = singleItem.GetValue("itemId").FirstOrDefault().ToString(),
+                        name = singleItem.GetValue("title").FirstOrDefault().ToString(),
+                        imageUrl = imageUrl,
+                        description = String.Join(", ", description.ToArray()),
+                        price = currentPrice.GetValue("__value__").ToString() + " " +
+                        currentPrice.GetValue("@currencyId").ToString(),
+                        link = itemUrl
+                    });
+                }
             }
             return listOfProducts;
         }
