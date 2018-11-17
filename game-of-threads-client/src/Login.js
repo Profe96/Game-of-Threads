@@ -14,7 +14,7 @@ class Login extends Component {
         if (token) {
             this.setState({ token: token });
             this.callApi().then(res => {
-                this.props.history.push(`/home/${res.name}`);
+                this.props.history.push(`/home/${res.email}`);
             });
         }
     }

@@ -16,11 +16,6 @@ namespace ServerApi.Services
             clientId = Startup.EbayClientId;
         }
 
-        public Product getProductById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IList<Product> getProductsByName(string name)
         {
             var ebayApiCall = new EbayCall
@@ -50,14 +45,14 @@ namespace ServerApi.Services
                 var sellingStatus = ((JArray)singleItem.GetValue("sellingStatus")).Children();
                 JObject currentPrice = (JObject)((JObject)sellingStatus.FirstOrDefault()).GetValue("convertedCurrentPrice").FirstOrDefault();
 
-                //var description = EbayCrawler.crawlerAsyncForDescriptionAsync(singleItem.GetValue("viewItemURL").FirstOrDefault().ToString());
+                var description = EbayCrawler.crawlerForDescription(singleItem.GetValue("viewItemURL").FirstOrDefault().ToString());
 
                 listOfProducts.Add(new Product
                 {
                     id = singleItem.GetValue("itemId").FirstOrDefault().ToString(),
                     name = singleItem.GetValue("title").FirstOrDefault().ToString(),
                     imageUrl = singleItem.GetValue("galleryURL").FirstOrDefault().ToString(),
-                    description = "",
+                    description = String.Join(", ", description.ToArray()),
                     price = currentPrice.GetValue("__value__").ToString() + " " +
                     currentPrice.GetValue("@currencyId").ToString(),
                     link = singleItem.GetValue("viewItemURL").FirstOrDefault().ToString()

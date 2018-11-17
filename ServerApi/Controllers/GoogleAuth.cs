@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Google.Apis.Auth;
 
 using ServerApi.Models;
+using ServerApi.Database;
 
 namespace ServerApi.Controllers
 {
@@ -18,6 +19,7 @@ namespace ServerApi.Controllers
         public async Task<User> GetAsync(string idToken)
         {
             User user = await getAuthorization(idToken);
+            Connection.register_user(user.email);
             return user;
         }
 

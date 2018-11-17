@@ -40,7 +40,7 @@ class Home extends Component {
             <div>
                 <SearchBar searchTerm={this.state.searchTerm} onFilterTextChange={this.handleFilterTextChange} handleClickSearch={this.handleClickSearch} />
                 <GoogleLogout buttonText="Logout" onLogoutSuccess={this.signOut} />
-                <ProductTable products={this.state.productsResponse} />
+                <ProductTable products={this.state.productsResponse} email={this.props.match.params.id} />
             </div>
         );
     }
@@ -63,9 +63,9 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <div>
-                <input type="text" placeholder="Buscar" onChange={this.handleFilterTextChange} value={this.props.searchTerm} />
-                <button onClick={this.handleClick}>Search</button>
+            <div className="Searcher">
+                <input className="SearchBar" type="text" placeholder="Buscar" onChange={this.handleFilterTextChange} value={this.props.searchTerm} />
+                <button className="SearcherButton" onClick={this.handleClick}><i className="fa fa-search"></i></button>
             </div>
         );
     }
@@ -76,25 +76,46 @@ class ProductTable extends Component {
         var products = [];
 
         this.props.products.forEach(product => {
-            products.push(<Product product={product} key={product.id} />);
+            products.push(<Product product={product} key={product.id} email={this.props.email} />);
         });
 
         return (
-            <div>{products}</div>
+            <div className="ProductTable">{products}</div>
         );
     }
 }
 
 class Product extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        fetch(`/selected?email=${this.props.email}&id=${this.props.product.id}&link=${this.props.product.link}&description=${this.props.product.description}`);
+        window.location = this.props.product.link;
+    }
+
     render() {
         let product = this.props.product;
+        let description = product.description.split(",");
+        description = <ul>
+            <li>Color: {description[0]}</li>
+            <li>Power: {description[1]}</li>
+        </ul>
+
         return (
-            <div>
-                <img src={product.imageUrl} alt="Product" />
-                <div>{product.name}</div>
-                <div>{product.description}</div>
-                <div>{product.link}</div>
-                <div>{product.price}</div>
+            <div className="Product">
+                <div className="imageDiv">
+                    <img src={product.imageUrl} alt="Product" className="ImageProduct" />
+                </div>
+                <div className="descDiv">
+                    <div className="ProductName">{product.name}</div>
+                    <div className="ProductDescription">{description}</div>
+                    <div className="ProductPrice">{product.price}</div>
+                </div>
+                <div className="ProductLink" onClick={this.handleClick}><i class="fa fa-link"></i></div>
             </div>
         );
     }

@@ -5,27 +5,51 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 
 using ServerApi.Models;
+using System.Collections.Generic;
+using System.Net;
 
 namespace ServerApi.Services
 {
     public class EbayCrawler
     {
-        public static async Task<ProductDescription> crawlerAsyncForDescriptionAsync(string url)
+        public static List<string> crawlerForDescription(string url)
         {
-            HttpClient httpClient = new HttpClient();
-            var html = await httpClient.GetStringAsync(url);
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(html);
-            var divs =
-            htmlDocument.DocumentNode.Descendants("div")
-            .Where(node => node.GetAttributeValue("class", "").Equals("prodDetailSec")).FirstOrDefault();
-            var table = divs.Descendants("table").FirstOrDefault().Descendants("tbody");
-            foreach (var tr in table)
-            {
-                Console.WriteLine(tr.Descendants("td").Where(value => value.InnerText.ToUpper().Equals("BRAND")));
-            }
+            WebClient client = new WebClient();
+            String htmlCode = client.DownloadString(url);
+            List<string> caracteristicas = new List<string>();
+            caracteristicas.Add("color");
+            caracteristicas.Add("power");
 
-            return null;
+            List<string> caracteristicas2 = new List<string>();
+
+            foreach (var item in caracteristicas)
+            {
+                try
+                {
+                    var copia = htmlCode.ToLower();
+                    var prueba = "";
+                    var prueba2 = "";
+                    var prueba3 = "";
+
+                    if (htmlCode.ToLower().Contains(item))
+                    {
+                        prueba = copia.Substring(0, copia.IndexOf(">" + item + "</td>"));
+                        prueba2 = copia.Replace(prueba, "");
+                        prueba2 = prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("</tr>"));
+                        prueba3 = prueba2.Replace(prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("\">") + 2), "");
+                        caracteristicas2.Add((prueba3.Replace("\r\n", "").Replace("\n", "").Replace("\r", "").Replace("</td>", "").Replace("</tr>", "").Replace(" ", "")).Trim());
+                    }
+                    else
+                    {
+                        caracteristicas2.Add("None");
+                    }
+                }
+                catch (System.ArgumentOutOfRangeException e)
+                {
+                    caracteristicas2.Add("None");
+                }
+            }
+            return caracteristicas2;
         }
     }
 }
