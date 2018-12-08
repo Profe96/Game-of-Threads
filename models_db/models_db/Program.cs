@@ -25,16 +25,79 @@ namespace models_db
         //description = clave:valor, clave2:valor2
         static void Main(string[] args)
         {
-            builder = new MySqlConnectionStringBuilder
+
+            WebClient client = new WebClient();
+            String htmlCode = client.DownloadString("https://www.ebay.com/itm/Samsung-65-Class-LED-Q6F-Series-2160p-Smart-4K-UHD-TV-with-HDR/253968935769?epid=28016007850&hash=item3b21ba6b59:g:6zoAAOSwoDlb4jwK:rk:6:pf:0");
+            htmlCode = htmlCode.ToLower();
+            List<string> caracteristicas = new List<string>();
+            caracteristicas.Add("brand");
+            caracteristicas.Add("color");
+            caracteristicas.Add("display technology");
+
+            var copia = htmlCode;
+            foreach (var item in caracteristicas)
             {
-                Server = "mydatabase-mysqldbserver.mysql.database.azure.com",
-                Database = "got_main_database",
-                UserID = "mysqldbuser@mydatabase-mysqldbserver",
-                Password = "pasS123456",
-                SslMode = MySqlSslMode.Required,
-            };
+               
+                var prueba = "";
+                var prueba2 = "";
+                var prueba3 = "";
+                if (htmlCode.Contains(item))
+                {
+                    prueba = copia.Substring(0, copia.IndexOf(">" + item + "</td>"));
+                    prueba2 = copia.Replace(prueba, "");
+                    prueba2 = prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("</tr>"));
+                    prueba3 = prueba2.Replace(prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("\">") + 2), "");
+                }
+                Console.WriteLine((prueba3.Replace("\r\n", "").Replace("\n", "").Replace("\r", "").Replace("</td>", "").Replace("</tr>", "").Replace("<td>", "").Replace("<tr>", "").Replace(" ", "")).Trim());
+              
+            }
+
+            Console.Read();
+
+
         }
 
+        public static List<string> crawlerForDescription(string url)
+        {
+            WebClient client = new WebClient();
+            String htmlCode = client.DownloadString(url);
+            List<string> caracteristicas = new List<string>();
+            caracteristicas.Add("brand");
+            caracteristicas.Add("color");
+            caracteristicas.Add("display technology");
+
+            List<string> caracteristicas2 = new List<string>();
+
+            foreach (var item in caracteristicas)
+            {
+                try
+                {
+                    var copia = htmlCode.ToLower();
+                    var prueba = "";
+                    var prueba2 = "";
+                    var prueba3 = "";
+
+                    if (htmlCode.ToLower().Contains(item))
+                    {
+                        prueba = copia.Substring(0, copia.IndexOf(">" + item + "</td>"));
+                        prueba2 = copia.Replace(prueba, "");
+                        prueba2 = prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("</tr>"));
+                        prueba3 = prueba2.Replace(prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("\">") + 2), "");
+                        caracteristicas2.Add(item + ":" + (prueba3.Replace("\r\n", "").Replace("\n", "").Replace("\r", "").Replace("</td>", "").Replace("</tr>", "").Replace("<td>", "").Replace("<tr>", "").Replace(" ", "")).Trim());
+                    }
+                    else
+                    {
+                        caracteristicas2.Add(item + ":" + "None");
+                    }
+                }
+                catch (System.ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine(e);
+                    caracteristicas2.Add(item + ":" + "None");
+                }
+            }
+            return caracteristicas2;
+        }
         public void register_user(string Email)
         {
 
