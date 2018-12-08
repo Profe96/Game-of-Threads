@@ -16,19 +16,12 @@ namespace ServerApi.Database
         {
             builder = new MySqlConnectionStringBuilder
             {
-                Server = "localhost",
-                Database = "got_main_database",
-                UserID = "root",
-            };
-            /*
-                        builder = new MySqlConnectionStringBuilder
-            {
                 Server = "mydatabase-mysqldbserver.mysql.database.azure.com",
                 Database = "got_main_database",
                 UserID = "mysqldbuser@mydatabase-mysqldbserver",
                 Password = "pasS123456",
                 SslMode = MySqlSslMode.Required,
-            }; */
+            }; 
         }
 
         public void register_user(string Email)

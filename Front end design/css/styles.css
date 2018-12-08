@@ -1,0 +1,105 @@
+
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+.section{
+    width:60%;
+}
+
+.section-item {
+    margin-bottom: 30px;
+    width:100% !important;  
+}
+
+.centering{
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top:5%;
+    
+}
+
+img.logo {
+    
+    max-width:35%;
+    max-height:35%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 40%;
+    min-height: 40%;
+  }
+
+h4.slogan{
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    padding-bottom: 15px;                      
+}
+
+.topnav {
+    overflow: auto;
+    background-color: #e9e9e9;
+}
+
+
+p.suggestion{
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+}
+.topnav a {
+    float: right;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 10px 13px;
+    text-decoration: none;
+    font-size: 19px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.topnav img {
+    float: right;
+    display: block;
+}
+
+img.art{
+    max-width:100%;
+    max-height:100%;
+    display: center;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 60%;
+    min-height: 60%;
+}
+
+
+.centerText{
+    text-align: center;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;   
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: rgb(109, 186, 58);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background:  rgb(109, 186, 58);
+    cursor: pointer;
+}

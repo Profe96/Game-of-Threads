@@ -49,8 +49,8 @@ namespace ServerApi.Services
                 var imageUrl = singleItem.GetValue("galleryURL").FirstOrDefault().ToString();
 
                 var description = EbayCrawler.crawlerForDescription(itemUrl);
-                if (ImageVerification.VerifyImage(imageUrl, name.Split(" ")[0]))
-                {
+                //if (ImageVerification.VerifyImage(imageUrl, name.Split(" ")[0]))
+                //{
                     listOfProducts.Add(new Product
                     {
                         id = singleItem.GetValue("itemId").FirstOrDefault().ToString(),
@@ -61,7 +61,7 @@ namespace ServerApi.Services
                         currentPrice.GetValue("@currencyId").ToString(),
                         link = itemUrl
                     });
-                }
+                //}
             }
             return listOfProducts;
         }

@@ -38,7 +38,12 @@ namespace ServerApi.Services
                         prueba2 = copia.Replace(prueba, "");
                         prueba2 = prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("</tr>"));
                         prueba3 = prueba2.Replace(prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("\">") + 2), "");
-                        caracteristicas2.Add(item + ":" + (prueba3.Replace("\r\n", "").Replace("\n", "").Replace("\r", "").Replace("</td>", "").Replace("</tr>", "").Replace("<td>", "").Replace("<tr>", "").Replace(" ", "")).Trim());
+                        caracteristicas2.Add(item + ":" + (prueba3.Replace("\r\n", "")
+                        .Replace("\n", "").Replace("\r", "")
+                        .Replace("</td>", "").Replace("</tr>", "")
+                        .Replace("<td>", "").Replace("<tr>", "")
+                        .Replace(" ", "")).Replace("\t", "")
+                        .Replace("<trclas", "").Trim());
                     }
                     else
                     {
