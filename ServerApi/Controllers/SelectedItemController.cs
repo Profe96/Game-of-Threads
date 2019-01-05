@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc;
-
-using ServerApi.Services;
-using ServerApi.Models;
+using Newtonsoft.Json.Linq;
 using ServerApi.Database;
+using ServerApi.Models;
+using ServerApi.Services;
 
 namespace ServerApi.Controllers
 {
@@ -16,10 +15,39 @@ namespace ServerApi.Controllers
     public class SelectedItemController : Controller
     {
         [HttpGet]
-        public void Get(string email, string id, string link, string description)
+        public void Get(int id, string ebayId, string link, string description)
         {
-            int id_group = new Connection().select_id_group(email);
-            new Connection().insert_products(id, 1, link, "Ebay", email, id_group, description);
+            if (verifyDescription(description))
+            {
+                new Connection().insertProduct(link, id, description.Trim(), ebayId);
+            }
         }
+
+        public bool verifyDescription(string description)
+        {
+            var descriptionArray = description.Split(",");
+            if (descriptionArray.Length == 3)
+            {
+                var colorPair = descriptionArray[0].Split(":");
+                var brandPair = descriptionArray[1].Split(":");
+                var sizePair = descriptionArray[2].Split(":");
+
+                if (colorPair.Length == 2 && brandPair.Length == 2 && sizePair.Length == 2)
+                {
+                    if (colorPair[0].ToLower().Equals("color"))
+                    {
+                        if (brandPair[0].ToLower().Equals("brand"))
+                        {
+                            if (sizePair[0].ToLower().Equals("size"))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
     }
 }

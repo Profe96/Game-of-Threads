@@ -16,6 +16,12 @@
     
 }
 
+#results{
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    
+}
+
 img.logo {
     
     max-width:35%;
@@ -26,6 +32,28 @@ img.logo {
     min-width: 40%;
     min-height: 40%;
   }
+
+  .centerDiv{
+    text-align:center;
+    display: center;
+  }
+
+  .imagediv{
+    text-align:left;
+    padding-left:25px;
+    padding-right:px;
+  }
+
+img.prueba {
+    
+    max-width:15%;
+    max-height:15%;
+    display: center;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 40%;
+    min-height: 40%;
+}
 
 h4.slogan{
     font-family: 'Oswald', sans-serif;

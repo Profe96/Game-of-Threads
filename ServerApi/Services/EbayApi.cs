@@ -51,16 +51,16 @@ namespace ServerApi.Services
                 var description = EbayCrawler.crawlerForDescription(itemUrl);
                 //if (ImageVerification.VerifyImage(imageUrl, name.Split(" ")[0]))
                 //{
-                    listOfProducts.Add(new Product
-                    {
-                        id = singleItem.GetValue("itemId").FirstOrDefault().ToString(),
-                        name = singleItem.GetValue("title").FirstOrDefault().ToString(),
-                        imageUrl = imageUrl,
-                        description = String.Join(", ", description.ToArray()),
-                        price = currentPrice.GetValue("__value__").ToString() + " " +
-                        currentPrice.GetValue("@currencyId").ToString(),
-                        link = itemUrl
-                    });
+                listOfProducts.Add(new Product
+                {
+                    id = singleItem.GetValue("itemId").FirstOrDefault().ToString(),
+                    name = singleItem.GetValue("title").FirstOrDefault().ToString(),
+                    imageUrl = imageUrl,
+                    description = String.Join(",", description.ToArray()),
+                    price = currentPrice.GetValue("__value__").ToString() + " " +
+                    currentPrice.GetValue("@currencyId").ToString(),
+                    link = itemUrl
+                });
                 //}
             }
             return listOfProducts;
@@ -75,7 +75,7 @@ namespace ServerApi.Services
             }
 
             IList<Product> recommendations = new List<Product>();
-            var productList = new List<string> { "microwave", "toaster", "blender" };
+            var productList = new List<string> { "televisions" };
             productList.ForEach(product =>
             {
                 IList<Product> a = getProductsByName(product + extra, 3);

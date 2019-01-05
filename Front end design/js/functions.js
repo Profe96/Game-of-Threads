@@ -1,4 +1,4 @@
-const serverApi = "https://gameofthreads.azurewebsites.net/";
+const serverApi = "http://localhost:8000/";
 var userEmail = null;
 
 $(() => {
@@ -9,9 +9,8 @@ $(() => {
         $.ajax({
             url: serverApi + "product?searchTerm=" + c,
             success: function (result) {
-                console.log(result);
-                window.sessionStorage.setItem('products', result);
-                window.location = "./home.html"
+                window.sessionStorage.setItem('products', JSON.stringify(result));
+                window.location = "./landing.html"
             }
         });
     });
@@ -27,7 +26,7 @@ function onSignIn(googleUser) {
     $.ajax({
         url: serverApi + "google/auth?idToken=" + id_token,
         success: function (result) {
-            setCookie('email', result.email, 0.005);
+            setCookie('id', result.id, 0.005);
             document.getElementById('GoogleAuthLogIn').hidden = true;
             document.getElementById('GoogleAuthLogOut').hidden = false;
         }
@@ -35,28 +34,12 @@ function onSignIn(googleUser) {
 }
 
 function getRecommendations() {
-    var email = getCookie('email');
+    var email = getCookie('id');
     if (email) {
         $.ajax({
-            url: serverApi + "product/recommendation?email=" + email,
+            url: serverApi + "product/recommendation?ic=" + email,
             success: function (result) {
                 console.log(result);
-            }
-        });
-    }
-}
-
-function selectionClickHandler(product) {
-    var email = getCookie('email');
-    if (email) {
-        $.ajax({
-            url: serverApi + "selected?" +
-                "email=" + email +
-                "&id=" + product.id +
-                "&link=" + product.link +
-                "&description=" + product.description,
-            success: function () {
-                console.log("Saved.")
             }
         });
     }
@@ -65,7 +48,7 @@ function selectionClickHandler(product) {
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-        setCookie('email', '', 0.005);
+        setCookie('id', '', 0.005);
         document.getElementById('GoogleAuthLogIn').hidden = false;
         document.getElementById('GoogleAuthLogOut').hidden = true;
     });
@@ -150,7 +133,7 @@ const verifyBrands = (str) => {
 
 
 const verifyDevices = (str) => {
-    var devices = ["Televisores, Microondas", "Lavadoras", "Refrigeradoras", "Microondas", "Vitroceramicas", "Cocinas"];
+    var devices = ["Televisions, Microwaves", "Washing Machine", "Fridges", "ceramic"];
 
     document.getElementById("deviceHint").innerHTML = "";
     devices.forEach(device => {

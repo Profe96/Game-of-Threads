@@ -15,9 +15,9 @@ namespace ServerApi.Controllers
     public class RecommendationsController : Controller
     {
         [HttpGet]
-        public JsonResult Get(string email)
+        public JsonResult Get(int id)
         {
-            var a = new Connection().select_recomendations(email);
+            var a = new Connection().selectUserRecommendations(id);
             var products = new EbayApi().getProductsForRecommendation(a);
             return Json(products);
         }

@@ -1,25 +1,24 @@
 using System;
-using System.Net.Http;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-
 using ServerApi.Models;
-using System.Collections.Generic;
-using System.Net;
 
 namespace ServerApi.Services
 {
     public class EbayCrawler
     {
-         public static List<string> crawlerForDescription(string url)
+        public static List<string> crawlerForDescription(string url)
         {
             WebClient client = new WebClient();
             String htmlCode = client.DownloadString(url);
             List<string> caracteristicas = new List<string>();
-            caracteristicas.Add("brand");
             caracteristicas.Add("color");
-            caracteristicas.Add("display technology");
+            caracteristicas.Add("brand");
+            caracteristicas.Add("size");
 
             List<string> caracteristicas2 = new List<string>();
 
@@ -39,21 +38,21 @@ namespace ServerApi.Services
                         prueba2 = prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("</tr>"));
                         prueba3 = prueba2.Replace(prueba2.Substring(prueba2.IndexOf("</td>"), prueba2.IndexOf("\">") + 2), "");
                         caracteristicas2.Add(item + ":" + (prueba3.Replace("\r\n", "")
-                        .Replace("\n", "").Replace("\r", "")
-                        .Replace("</td>", "").Replace("</tr>", "")
-                        .Replace("<td>", "").Replace("<tr>", "")
-                        .Replace(" ", "")).Replace("\t", "")
-                        .Replace("<trclas", "").Trim());
+                                .Replace("\n", "").Replace("\r", "")
+                                .Replace("</td>", "").Replace("</tr>", "")
+                                .Replace("<td>", "").Replace("<tr>", "")
+                                .Replace(" ", "")).Replace("\t", "")
+                            .Replace("<trclas", "").Trim());
                     }
                     else
                     {
-                        caracteristicas2.Add(item + ":" + "None");
+                        caracteristicas2.Add(item + ":" + "none");
                     }
                 }
                 catch (System.ArgumentOutOfRangeException e)
                 {
                     Console.WriteLine(e);
-                    caracteristicas2.Add(item + ":" + "None");
+                    caracteristicas2.Add(item + ":" + "none");
                 }
             }
             return caracteristicas2;
