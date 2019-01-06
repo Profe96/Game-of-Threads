@@ -6,14 +6,14 @@ $(() => {
         var url_string = window.location.href
         var url = new URL(url_string);
         var c = url.searchParams.get("search");
-console.log(serializeSchema(document.getElementById("filterFormTec")));
+        console.log(serializeSchema(document.getElementById("filterFormTec")));
         /*
         $.ajax({
-            url: serverApi + "product?searchTerm=" + c,
-            success: function (result) {
-                window.sessionStorage.setItem('products', JSON.stringify(result));
-                window.location = "./landing.html"
-            }
+        url: serverApi + "product?searchTerm=" + c,
+        success: function (result) {
+        window.sessionStorage.setItem('products', JSON.stringify(result));
+        window.location = "./landing.html"
+        }
         });
         */
     });
@@ -53,6 +53,46 @@ function filtro(clave, valor) {
         return undefined;
     } else {
         return valor;
+    }
+};
+
+function serializeSchema(form) {
+    let array = [].map.call(form.getElementsByTagName("*"), function (el) {
+        switch (el.tagName) {
+            case 'INPUT':
+            switch(el.type){
+                    case 'checkbox':
+                    return (el.checked) ? {
+                        id: el.id,
+                        check: el.checked,
+                    }:null
+                    default:
+                    return{
+                        id: el.id,
+                        value: el.value,
+                    }
+
+            }                    
+              
+
+        }
+    }).filter(function (e) { return e !== undefined; });
+    return array.filter(Boolean);
+}
+
+function selectionClickHandler(product) {
+    var email = getCookie('email');
+    if (email) {
+        $.ajax({
+            url: serverApi + "selected?" +
+                "email=" + email +
+                "&id=" + product.id +
+                "&link=" + product.link +
+                "&description=" + product.description,
+            success: function () {
+                console.log("Saved.")
+            }
+        });
     }
 };
 
@@ -150,7 +190,7 @@ const showHint = (str) => {
 const verifyBrands = (str) => {
 
     // var input = Document.getElementById(prefferedBrand).value;
-    console.log(str);
+    
     var brands = ["Sony", "LG", "Philips", "Noblex", "TLC", "RCA", "Hitachi", "Panasonic"];
     document.getElementById("brandHint").innerHTML = "";
 
