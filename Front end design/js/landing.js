@@ -5,43 +5,63 @@ $(() => {
     products.forEach(pro => {
         var productDiv = document.createElement('div');
         productDiv.className = "row";
-        productDiv.style = "background-color: white;border: 1px solid black;border-radius: 10px";
+        productDiv.style = "background-color: white;box-shadow: -1px 1px 35px -10px rgba(0,0,0,0.75);border-radius: 10px;padding:10px";
 
         var productImageDiv = document.createElement('div');
-        productImageDiv.className = "col-3";
+        productImageDiv.className = "col-3 middleImage";
+        productImageDiv.style = "display: flex;align-items: center;flex-wrap: wrap;";
 
         var image = document.createElement('img');
         image.src = pro.imageUrl;
-        image.className = "modulesTv";
+        image.style = "width:100%;"
         productImageDiv.append(image);
 
         var productDescDiv = document.createElement('div');
         productDescDiv.className = "col-7";
 
+        var titleBar = document.createElement('h3');
+        titleBar.innerHTML = pro.name;
+        titleBar.style = "font-family: Montserrat;font-size:125%; margin-top:10px;";
+
+        var desc = document.createElement('p');
+        var g = "<br/><ul>";
+        pro.description.split(",").forEach(d => {
+            g += '<li style="font-family: Montserrat;font-size:100%;">' + d.split(":")[0].capitalize() + " : " + d.split(":")[1].capitalize() + "</li>";
+        });
+        desc.innerHTML = g + "</ul>";
+
+        var price = document.createElement('p');
+        price.innerHTML = pro.price;
+        price.style = "display:block;text-align:right;font-family: Montserrat;font-size:125%;color:red;";
+
+        productDescDiv.append(titleBar);
+        productDescDiv.append(desc);
+        productDescDiv.append(price);
+
         var productLinkDiv = document.createElement('div');
-        productLinkDiv.className = "col-2";
+        productLinkDiv.className = "col-2 middleImage";
+        productLinkDiv.style = "display: flex;align-items: center;flex-wrap: wrap;";
 
         var image2 = document.createElement('img');
         image2.src = "./src/ebay_logo.png";
-        image2.style = "width:100%; display:block;margin-top:5%";
+        image2.onclick = () => { selectionFromUser(pro.link, pro.id, pro.description) };
+        image2.style = "width:100%;cursor:pointer";
         productLinkDiv.append(image2);
+
+        var salto = document.createElement('br');
 
         productDiv.append(productImageDiv);
         productDiv.append(productDescDiv);
         productDiv.append(productLinkDiv);
 
         document.getElementById("containerGe").append(productDiv);
-
-        /*
-        $("#containerGe").append(
-            '<div class="container"><div id="container" class="row" style="background-color: white;border: 1px solid black;border-radius: 10px;">' +
-            '<div id="image1" class="col-sm-3"><img src="' + pro.imageUrl + '" alt="test_tv" class="modulesTv"></div>' +
-            '<div class="col-sm-7"><div class="col"><h4 class="items"> <span id="moduleTitle"></span>' + pro.name + '</h4>' +
-            '<p class="description"><span id="moduleText"></span>' + pro.description + '</p></div><p class="price">' + pro.price + '</p>' +
-            "</div><div class=\"col-sm-2\"><img src=\"./src/ebay_icon.png\" onclick=\"selectionFromUser('" + pro.link + "', '" + pro.id + "', '" + pro.description + "')\" alt=\"ebay_link\"/></div></div><br></div>");
-            */
+        document.getElementById("containerGe").append(salto);
     })
 });
+
+String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 
 function selectionFromUser(link, product, description) {
     window.open(link, '_blank');

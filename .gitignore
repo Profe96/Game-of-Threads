@@ -1,1 +1,4 @@
 /tests/Automated_Tests_Just_Find_It/node_modules
+
+/ServerApi/bin
+/ServerApi/obj
