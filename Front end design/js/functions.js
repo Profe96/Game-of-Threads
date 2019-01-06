@@ -7,6 +7,19 @@ $(() => {
         var url = new URL(url_string);
         var c = url.searchParams.get("search");
         console.log(serializeSchema(document.getElementById("filterFormTec")));
+        $('body').loadingModal({
+            
+              text: 'Loading...',
+              color: '#6DBA3A',
+              opacity: '0.7',
+              backgroundColor: 'rgb(0,0,0)',
+              animation: 'foldingCube'
+            
+            });
+
+        //al terminar la llamada ajax instanciar esta linea
+        $('body').loadingModal('destroy');
+
         /*
         $.ajax({
         url: serverApi + "product?searchTerm=" + c,
@@ -16,6 +29,12 @@ $(() => {
         }
         });
         */
+
+//
+
+
+//
+        
     });
 
     if (getCookie('email') !== "") {
