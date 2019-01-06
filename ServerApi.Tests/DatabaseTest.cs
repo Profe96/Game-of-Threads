@@ -34,8 +34,8 @@ namespace ServerApi.Tests
 
             // Assert
             Assert.Equal("black", _rec.GetValueOrDefault("color"));
-            Assert.Equal("vizio", _rec.GetValueOrDefault("brand"));
-            Assert.Equal("None", _rec.GetValueOrDefault("size"));
+            Assert.Equal("lg", _rec.GetValueOrDefault("brand"));
+            Assert.Equal("42\"", _rec.GetValueOrDefault("size"));
         }
     }
 }

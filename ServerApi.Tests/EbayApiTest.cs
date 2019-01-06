@@ -29,7 +29,7 @@ namespace ServerApi.Tests
             // Assert
             Assert.Equal(expected: entries, actual: products.Count);
             Assert.Contains("microwave", _p.name.ToLower());
-            Assert.Equal("78.99 USD", _p.price);
+            Assert.Equal("56.99 USD", _p.price);
 
         }
 

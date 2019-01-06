@@ -6,16 +6,15 @@ $(() => {
         var url_string = window.location.href
         var url = new URL(url_string);
         var c = url.searchParams.get("search");
-        console.log(serializeSchema(document.getElementById("filterFormTec")));
-        /*
+        var d = serializeSchema(document.getElementById("filterFormTec"));
+        c += " " + parseData(d);
         $.ajax({
-        url: serverApi + "product?searchTerm=" + c,
-        success: function (result) {
-        window.sessionStorage.setItem('products', JSON.stringify(result));
-        window.location = "./landing.html"
-        }
+            url: serverApi + "product?searchTerm=" + c,
+            success: function (result) {
+                window.sessionStorage.setItem('products', JSON.stringify(result));
+                window.location = "./landing.html"
+            }
         });
-        */
     });
 
     if (getCookie('email') !== "") {
@@ -23,6 +22,31 @@ $(() => {
         document.getElementById('GoogleAuthLogOut').hidden = false;
     }
 });
+
+function parseData(data) {
+    let s = {};
+    data.forEach(da => {
+        var id = da.id;
+        if (da.check) {
+            if (da.id == "black" || da.id == "white" || da.id == "gray") {
+                s.color = da.id;
+            }
+            if (da.id == "hd" || da.id == "fullhd" || da.id == "4k") {
+                s.tech = da.id;
+            }
+            if (da.id == "led" || da.id == "plasma" || da.id == "lcd" || da.id == "oled") {
+                s.tech2 = da.id;
+            }
+        } else {
+            s[id] = da.value;
+        }
+    });
+    s.screenSize = (s.screenSize) ? s.screenSize + "\" " : "";
+    s.desiredPricing = (s.desiredPricing) ? "$" + s.desiredPricing + " " : "";
+
+    return s.screenSize + s.desiredPricing + s.prefferedBrand + " " + s.screenTech + ((s.color) ? " " + s.color : "") +
+        ((s.tech) ? " " + s.tech : "") + ((s.tech2) ? " " + s.tech2 : "");
+}
 
 function onSignIn(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
@@ -40,7 +64,7 @@ function getRecommendations() {
     var email = getCookie('id');
     if (email) {
         $.ajax({
-            url: serverApi + "product/recommendation?ic=" + email,
+            url: serverApi + "product/recommendation?id=" + email,
             success: function (result) {
                 console.log(result);
             }
@@ -60,21 +84,18 @@ function serializeSchema(form) {
     let array = [].map.call(form.getElementsByTagName("*"), function (el) {
         switch (el.tagName) {
             case 'INPUT':
-            switch(el.type){
+                switch (el.type) {
                     case 'checkbox':
-                    return (el.checked) ? {
-                        id: el.id,
-                        check: el.checked,
-                    }:null
+                        return (el.checked) ? {
+                            id: el.id,
+                            check: el.checked,
+                        } : null
                     default:
-                    return{
-                        id: el.id,
-                        value: el.value,
-                    }
-
-            }                    
-              
-
+                        return {
+                            id: el.id,
+                            value: el.value,
+                        }
+                }
         }
     }).filter(function (e) { return e !== undefined; });
     return array.filter(Boolean);
@@ -95,27 +116,6 @@ function selectionClickHandler(product) {
         });
     }
 };
-
-function serializeSchema(form) {
-    return [].map.call(form.getElementsByTagName("*"), function (el) {
-        console.log(el);
-        switch (el.tagName) {
-            case 'INPUT':
-                return (el.type == "checkbox" && el.checked) ?
-                    {
-                        id: el.id,
-                        type: el.type,
-                        name: el.name,
-                        value: el.value
-                    } : {
-                        id: el.id,
-                        type: el.type,
-                        name: el.name,
-                        value: el.value
-                    }
-        }
-    }).filter(function (e) { return e !== undefined; });
-}
 
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
@@ -190,7 +190,7 @@ const showHint = (str) => {
 const verifyBrands = (str) => {
 
     // var input = Document.getElementById(prefferedBrand).value;
-    
+
     var brands = ["Sony", "LG", "Philips", "Noblex", "TLC", "RCA", "Hitachi", "Panasonic"];
     document.getElementById("brandHint").innerHTML = "";
 
