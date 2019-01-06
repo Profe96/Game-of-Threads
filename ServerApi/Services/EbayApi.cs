@@ -40,7 +40,6 @@ namespace ServerApi.Services
             JArray items = (JArray)json["findItemsByKeywordsResponse"].First["searchResult"].First["item"];
             if (items != null)
             {
-                Console.WriteLine(items);
                 foreach (var item in items.Children())
                 {
                     JObject singleItem = (JObject)item;

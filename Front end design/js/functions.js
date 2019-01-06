@@ -62,23 +62,11 @@ function onSignIn(googleUser) {
     $.ajax({
         url: serverApi + "google/auth?idToken=" + id_token,
         success: function (result) {
-            setCookie('id', result.id, 0.005);
+            setCookie('id', result.id, 1);
             document.getElementById('GoogleAuthLogIn').hidden = true;
             document.getElementById('GoogleAuthLogOut').hidden = false;
         }
     });
-}
-
-function getRecommendations() {
-    var email = getCookie('id');
-    if (email) {
-        $.ajax({
-            url: serverApi + "product/recommendation?id=" + email,
-            success: function (result) {
-                console.log(result);
-            }
-        });
-    }
 }
 
 function filtro(clave, valor) {
@@ -129,7 +117,7 @@ function selectionClickHandler(product) {
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-        setCookie('id', '', 0.005);
+        setCookie('id', '', 1);
         document.getElementById('GoogleAuthLogIn').hidden = false;
         document.getElementById('GoogleAuthLogOut').hidden = true;
     });

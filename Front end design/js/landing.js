@@ -1,5 +1,3 @@
-const serverApi = "http://192.168.0.19:8000/";
-
 $(() => {
     var products = JSON.parse(window.sessionStorage.getItem('products'));
     products.forEach(pro => {
@@ -32,7 +30,7 @@ $(() => {
 
         var price = document.createElement('p');
         price.innerHTML = pro.price;
-        price.style = "display:block;text-align:right;font-family: Montserrat;font-size:125%;color:red;";
+        price.style = "display:block;text-align:right;font-family: Montserrat;font-size:125%;color:rgb(109, 186, 58);";
 
         productDescDiv.append(titleBar);
         productDescDiv.append(desc);
@@ -56,7 +54,8 @@ $(() => {
 
         document.getElementById("containerGe").append(productDiv);
         document.getElementById("containerGe").append(salto);
-    })
+    });
+    getRecommendations();
 });
 
 String.prototype.capitalize = function () {
