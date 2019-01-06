@@ -8,9 +8,18 @@ $(() => {
         var c = url.searchParams.get("search");
         var d = serializeSchema(document.getElementById("filterFormTec"));
         c += " " + parseData(d);
+        $('body').loadingModal({         
+              text: 'Loading...',
+              color: '#6DBA3A',
+              opacity: '0.7',
+              backgroundColor: 'rgb(0,0,0)',
+              animation: 'foldingCube'
+            
+            });
         $.ajax({
             url: serverApi + "product?searchTerm=" + c,
             success: function (result) {
+                $('body').loadingModal('destroy');
                 window.sessionStorage.setItem('products', JSON.stringify(result));
                 window.location = "./landing.html"
             }
