@@ -1,4 +1,4 @@
-const serverApi = "http://localhost:8000/";
+const serverApi = "http://192.168.1.118:8000/";
 var userEmail = null;
 
 $(() => {
@@ -6,6 +6,8 @@ $(() => {
         var url_string = window.location.href
         var url = new URL(url_string);
         var c = url.searchParams.get("search");
+console.log(serializeSchema(document.getElementById("filterFormTec")));
+        /*
         $.ajax({
             url: serverApi + "product?searchTerm=" + c,
             success: function (result) {
@@ -13,6 +15,7 @@ $(() => {
                 window.location = "./landing.html"
             }
         });
+        */
     });
 
     if (getCookie('email') !== "") {
@@ -43,6 +46,35 @@ function getRecommendations() {
             }
         });
     }
+}
+
+function filtro(clave, valor) {
+    if (valor == '' || clave == null) {
+        return undefined;
+    } else {
+        return valor;
+    }
+};
+
+function serializeSchema(form) {
+    return [].map.call(form.getElementsByTagName("*"), function (el) {
+        console.log(el);
+        switch (el.tagName) {
+            case 'INPUT':
+                return (el.type == "checkbox" && el.checked) ?
+                    {
+                        id: el.id,
+                        type: el.type,
+                        name: el.name,
+                        value: el.value
+                    } : {
+                        id: el.id,
+                        type: el.type,
+                        name: el.name,
+                        value: el.value
+                    }
+        }
+    }).filter(function (e) { return e !== undefined; });
 }
 
 function signOut() {

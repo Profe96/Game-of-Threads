@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json.Linq;
 
+using ServerApi.Models;
+
 namespace ServerApi.Database
 {
     public class Connection
@@ -152,17 +154,44 @@ namespace ServerApi.Database
                 }
             }
 
-            var maxValueColor = color.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
-            var maxValueBrand = brand.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
-            var maxValueSize = size.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
-
             rec = new Dictionary<string, string>();
 
-            rec.Add("color", maxValueColor);
-            rec.Add("size", maxValueSize);
-            rec.Add("brand", maxValueBrand);
+            if (color.Count > 0 && brand.Count > 0 && size.Count > 0)
+            {
+                var maxValueColor = color.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+                var maxValueBrand = brand.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+                var maxValueSize = size.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+
+                rec.Add("color", maxValueColor);
+                rec.Add("size", maxValueSize);
+                rec.Add("brand", maxValueBrand);
+            }
 
             return rec;
+        }
+
+        public List<User> getUsers()
+        {
+            List<User> si = new List<User>();
+            using (var conn = new MySqlConnection(builder.ConnectionString))
+            {
+                conn.Open();
+                using (var command = conn.CreateCommand())
+                {
+                    string sql4 = "SELECT * FROM usuarios";
+                    MySqlCommand cmd4 = new MySqlCommand(sql4, conn);
+                    MySqlDataReader rdr = cmd4.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        si.Add(new User
+                        {
+                            id = Int32.Parse(rdr[0].ToString()),
+                            email = rdr[1].ToString()
+                        });
+                    }
+                    return si;
+                }
+            }
         }
     }
 }
