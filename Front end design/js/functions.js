@@ -1,4 +1,3 @@
-const serverApi = "http://192.168.0.19:8000/";
 var userEmail = null;
 
 $(() => {
@@ -77,26 +76,6 @@ function filtro(clave, valor) {
     }
 };
 
-function serializeSchema(form) {
-    let array = [].map.call(form.getElementsByTagName("*"), function (el) {
-        switch (el.tagName) {
-            case 'INPUT':
-                switch (el.type) {
-                    case 'checkbox':
-                        return (el.checked) ? {
-                            id: el.id,
-                            check: el.checked,
-                        } : null
-                    default:
-                        return {
-                            id: el.id,
-                            value: el.value,
-                        }
-                }
-        }
-    }).filter(function (e) { return e !== undefined; });
-    return array.filter(Boolean);
-}
 
 function selectionClickHandler(product) {
     var email = getCookie('email');
@@ -123,29 +102,6 @@ function signOut() {
     });
 }
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
 const slider = () => {
 
     var slider = document.getElementById("myRange");
@@ -165,54 +121,6 @@ const chequeado = (value) => {
     document.getElementById('wantedThick').disabled = !value;
 };
 
-const showHint = (str) => {
-    if (str.length == 0) {
-        document.getElementById("brandHint").innerHTML = "";
-        return;
-    } else {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("brandHint").innerHTML = this.responseText;
-            }
-        };
-        xmlhttp.open("GET", "getHintBrands.php?q=" + str, true);
-        xmlhttp.send();
-    }
-};
-
-
-
-
-const verifyBrands = (str) => {
-
-    // var input = Document.getElementById(prefferedBrand).value;
-
-    var brands = ["Sony", "LG", "Philips", "Noblex", "TLC", "RCA", "Hitachi", "Panasonic"];
-    document.getElementById("brandHint").innerHTML = "";
-
-    brands.forEach(brand => {
-        if (brand.toLowerCase().indexOf(str.toLowerCase()) > -1) {
-            document.getElementById("brandHint").innerHTML = brand;
-        }
-    });
-
-
-};
-
-
-const verifyDevices = (str) => {
-    var devices = ["Televisions, Microwaves", "Washing Machine", "Fridges", "ceramic"];
-
-    document.getElementById("deviceHint").innerHTML = "";
-    devices.forEach(device => {
-
-        if (device.toLocaleLowerCase().indexOf(str.toLocaleLowerCase()) > -1) {
-            document.getElementById("deviceHint").innerHTML = device;
-        }
-
-    });
-};
 
 
 
