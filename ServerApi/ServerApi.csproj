@@ -12,7 +12,12 @@
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.36.1" />
     <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.36.1.1404" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.10" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision" Version="3.2.0" />
+    <PackageReference Include="MySql" Version="5.5.14.1" />
+    <PackageReference Include="MySql.Data" Version="8.0.13" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
 </Project>

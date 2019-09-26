@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Selector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/jquery.loadingModal.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/styles.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/functions.js"></script>
+    <script src="./js/autocomplete.js"></script>
+    <script src="./js/serialize.js"></script>
+    <script src="js/jquery.loadingModal.js"></script>
+
+</head>
+
+<body onload="slider()">
+
+    <div class="topnav">
+
+        <a href=".\home.html">
+            <img src="./src/house__icon.png" alt="LLévame a casa" class="icon"></a>
+    </div>
+
+
+
+    <div id="Container" class="centering">
+
+        <form id="filterFormTec" action="">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 section-item">
+                    <div class="card h-100">
+                        <!--card body-->
+                        <div class="card-body">
+                            <h4 class="card-title centerText">
+                                <a>Caracteristicas técnicas</a>
+                            </h4>
+
+
+                            <label for="screenSize">¿Tiene algún tamaño de pantalla en mente? <small>(pulgadas)</small></label>
+                            <input type="number" min="22" class="form-control" id="screenSize" placeholder="">
+                            <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                            <br>
+                            <label>¿Prefiere resolución 720, full HD o 4k?</label><br>
+                            <input type="checkbox" id="hd" placeholder="px"><label for="hd">HD</label><br>
+                            <input type="checkbox" id="fullhd" placeholder="px"><label for="fullhd">FullHD</label><br>
+                            <input type="checkbox" id="4K" placeholder="px"><label for="4K">4K</label> <br>
+
+                            <br>
+                            <label for="screenTech">¿Le interesa que la televisión sea más amigable con su vista o
+                                prefiere la más económica?</label>
+                            <input type="text" id="screenTech" class="form-control" placeholder="V/E">
+                            <label>¿Quisiera una tecnología de pantalla específica?</label><br>
+                            <input type="checkbox" id="led" placeholder="px"><label for="led">LED</label><br>
+                            <input type="checkbox" id="plasma" placeholder="px"><label for="plasma">Plasma</label><br>
+                            <input type="checkbox" id="lcd" placeholder="px"><label for="lcd">LCD</label><br>
+                            <input type="checkbox" id="oled" placeholder="px"><label for="oled">OLED</label><br>
+                            <br>
+
+                            <label for="screenUsersAmount">¿Cuántas personas utilizarán el electrodoméstico? </label>
+                            <input type="number" min="0" max="100" class="form-control" id="screenUsersAmount"
+                                placeholder="">
+                            <br>
+                            <label for="screenDailyUsage">¿Cuántas veces lo usas al dia?</label>
+                            <input type="number" min="0" class="form-control" id="screenDailyUsage" placeholder="">
+                            <br>
+                            <label for="screenTotalAmount"> ¿Cuántos electrodomésticos de este tipo posees?</label>
+                            <input type="number" min="0" class="form-control" id="screenTotalAmount" placeholder="Cantidad">
+                            <br>
+                            <label for="screenHoursUsage">¿Un uso normal de éste electrodoméstico sería de cuánto
+                                tiempo en horas?</label>
+                            <input type="number" min="0" class="form-control" id="screenHoursUsage" placeholder="Horas">
+
+
+                        </div>
+
+                        <!--end card body-->
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6 section-item">
+                    <div class="card h-100">
+                        <!--card body-->
+                        <div class="card-body">
+                            <h4 class="card-title centerText">
+                                <a>Sección UX</a>
+                            </h4>
+
+                            <label for="prefferedBrand">¿Hay alguna marca que tengas en mente? </label>
+                            <input type="text" class="form-control" id="prefferedBrand" onkeyup="verifyBrands(this.value)"
+                                placeholder="">
+                            <p class="suggestion">Sugerencia: <span id="brandHint"></span></p>
+                            <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                            <br>
+                            <label for="prefferedColor">¿Prefieres algún color en específico?</label><br>
+                            <input type="checkbox" id="negro" placeholder="px"> <label for="negro">Black</label> <br>
+                            <input type="checkbox" id="blanco" placeholder="px"><label for="blanco">White</label><br>
+                            <input type="checkbox" id="gris" placeholder="px"><label for="gris">Gray</label><br>
+
+                            <br>
+                            <label for="includeButtons">¿Te gustaría que tu televisor incluya puertos hdmi, vga, etc?</label>
+                            <input type="text" class="form-control" id="includeButtons" placeholder="HDMI, RCA, usb, etc...">
+                            <br>
+                            <label for="deviceThickness">¿El grosor del televisor es importante para ti? <small>(Caso
+                                    contrario deja sin marcar)</small> </label>
+                            <input type="checkbox" class="form-control" id="deviceThickness" onchange="chequeado(this.checked)">
+                            <br>
+                            <label for="MaxThick">¿Si es así, que grosor máximo te gustaría?</label>
+                            <input type="number" min="0" class="form-control" id="wantedThick" placeholder="cm..."
+                                disabled>
+
+                            <!--form-control-s-->
+
+
+                        </div>
+                        <!--end card body-->
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6 section-item">
+                    <div class="card h-100">
+                        <!--card body-->
+                        <div class="card-body centerText">
+                            <h4 class="card-title centering">
+                                <a>Precio</a>
+                            </h4>
+
+                            <div class="slidecontainer">
+                                <input type="range" min="1" max="10000" value="0" class="slider" id="myRange">
+                                <p>Precio máximo: <span id="value"></span></p>
+                                <input type="number" id="desiredPricing">
+                            </div>
+                        </div>
+
+                        <!--card body-->
+                    </div>
+                </div>
+                <!-- end of row-->
+        </form>
+    </div>
+
+    <!--end of container-->
+
+    <button id="submitButton" type="submit" class="btn btn-success centering" value="Submit">Submit</button>
+
+</body>
+
+</html>

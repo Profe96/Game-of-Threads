@@ -1,0 +1,17 @@
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\ServerApi.Tests.deps.json
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\ServerApi.Tests.runtimeconfig.json
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\ServerApi.Tests.runtimeconfig.dev.json
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\ServerApi.Tests.dll
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\ServerApi.Tests.pdb
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\ServerApi.dll
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\bin\MCD\Debug\netcoreapp2.1\ServerApi.pdb
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\obj\MCD\Debug\netcoreapp2.1\ServerApi.Tests.csprojAssemblyReference.cache
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\obj\MCD\Debug\netcoreapp2.1\ServerApi.Tests.csproj.CoreCompileInputs.cache
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\obj\MCD\Debug\netcoreapp2.1\ServerApi.Tests.AssemblyInfoInputs.cache
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\obj\MCD\Debug\netcoreapp2.1\ServerApi.Tests.AssemblyInfo.cs
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\obj\MCD\Debug\netcoreapp2.1\ServerApi.Tests.csproj.CopyComplete
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\obj\MCD\Debug\netcoreapp2.1\ServerApi.Tests.dll
+C:\Localhost\Rocket\Game-of-Threads\ServerApi.Tests\obj\MCD\Debug\netcoreapp2.1\ServerApi.Tests.pdb

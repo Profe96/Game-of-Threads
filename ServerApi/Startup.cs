@@ -18,12 +18,15 @@ namespace ServerApi
         public static string GoogleClientId { get; private set; }
         public static string GoogleClientSecret { get; private set; }
         public static string GoogleRedirectUri { get; private set; }
+        public static string EbayClientId {get; private set;}
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             GoogleClientId = Configuration["Google:clientId"];
             GoogleClientSecret = Configuration["Azure:clientSecret"];
             GoogleRedirectUri = Configuration["Azure:clientId"];
+            EbayClientId = Configuration["Ebay:clientId"];
         }
 
         public IConfiguration Configuration { get; }

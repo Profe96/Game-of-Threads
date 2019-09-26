@@ -2,31 +2,35 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-using System.Web;
-
-using System.Net.Http;
-
-using Google.Apis.Oauth2.v2;
 using Google.Apis.Auth;
+using Microsoft.AspNetCore.Mvc;
+using ServerApi.Database;
+using ServerApi.Models;
 
 namespace ServerApi.Controllers
 {
+
     [Route("google/auth")]
     [ApiController]
     public class GoogleAuth : Controller
     {
-        [HttpPost]
-        public void Post([FromBody] string token)
+        [HttpGet]
+        public async Task<User> GetAsync(string idToken)
         {
-            authenticateToken(token);
+            User user = await getAuthorization(idToken);
+            int id = new Connection().registerUser(user.email);
+            user.id = id;
+            return user;
         }
 
-
-        private async Task<GoogleJsonWebSignature.Payload> authenticateToken(string token)
+        public async Task<User> getAuthorization(string token)
         {
-            return await GoogleJsonWebSignature.ValidateAsync(token);
+            var validPayload = await GoogleJsonWebSignature.ValidateAsync(token);
+            return new User
+            {
+                name = validPayload.Name,
+                email = validPayload.Email
+            };
         }
     }
 }
